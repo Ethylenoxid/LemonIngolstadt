@@ -38,6 +38,8 @@ namespace Lemon
         }
 	private string CalcHash(byte[] inputBytes, SHA256 sha256)
 	{
+	    Console.WriteLine("in CalcHash: inputBytes="+inputBytes);//DEV
+	    Console.WriteLine("in CalcHash: inputBytes="+Convert.ToBase64String(inputBytes));//DEV
 	    byte[] outputBytes = sha256.ComputeHash(inputBytes);//ori
 	    return Convert.ToBase64String(outputBytes);//ori
 	    //return "b918b1e89ff06dfc209ec7ab313e19353bfc29e41b469ac12263497b1d157dcd";//test
@@ -72,7 +74,7 @@ namespace Lemon
             Block latestBlock = GetLatestBlock();  
             block.Index = latestBlock.Index + 1;  
             block.PreviousHash = latestBlock.Hash;  
-            block.Hash = block.CalculateHash();  
+            block.Hash = block.CalculateHash();
             Chain.Add(block);  
         }
 	public void PrintBlockchain()
@@ -84,6 +86,54 @@ namespace Lemon
 	        Console.WriteLine("element{0}: Index={1}, TimeStamp={2}, Hash={3}, PreviousHash={4}, Data={5}", j, Chain[i].Index, Chain[i].TimeStamp, Chain[i].Hash, Chain[i].PreviousHash, Chain[i].Data);
 	    }
 	}
+        public bool IsValid()  
+        {  
+            for (int i = 1; i < Chain.Count; i++)  
+            {  
+                Block currentBlock = Chain[i];  
+                Block previousBlock = Chain[i - 1];  
+                if (currentBlock.Hash != currentBlock.CalculateHash())  
+                {  
+                    return false;  
+                }  
+                if (currentBlock.PreviousHash != previousBlock.Hash)  
+                {  
+                    return false;  
+                }  
+            }  
+            return true;  
+        }
+        public bool IsValidW()
+	{
+	    if (!IsValid())
+	    {
+	         Console.WriteLine("WARNING: Blockchain invalid");
+	         return false;
+	    }
+            return true;
+	}
+	public bool IsValidE(string hash2compare, int i_chain=-1, bool withWarning=false)
+	{
+	    if (i_chain==-1)
+	    {
+	        i_chain+=Chain.Count;
+	    }
+            Block block2check = Chain[i_chain]; 
+            if (block2check.Hash != hash2compare)  
+            {
+	        if (withWarning)
+		{
+		    Console.WriteLine("WARNING: Blockchain invalid");
+		}
+                return false;  
+            }
+            return true;  
+	}
+
+
+
+
+
     } 
     public class Program
     {
@@ -94,10 +144,16 @@ namespace Lemon
             Console.WriteLine("");
 	    phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Beckenbauer,receiver:Rummenigge,amount:10}"));
 	    phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Rummenigge,receiver:Hoeneß,amount:10}"));
-	    //Console.WriteLine(ToString(phillyCoin));
-	    //Console.WriteLine(JsonConvert.SerializeObject(phillyCoin, Formatting.Indented));
-            //PrintTypes(spot);
 	    phillyCoin.PrintBlockchain();
+	    string hashToCheck="test";
+	    if (phillyCoin.IsValidE(hashToCheck))
+	    {
+                Console.WriteLine("Your certificate is valid");
+	    }
+	    else
+	    {
+                Console.WriteLine("Invalid");
+	    }
         }
     }
 }
