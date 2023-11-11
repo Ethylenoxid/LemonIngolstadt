@@ -44,7 +44,6 @@ Blockchain Transaction Record of Ownership Transfer Image:
 
 - Digital Blockchain ID of Seller:
 
-  ![4](https://github.com/Ethylenoxid/LemonIngolstadt/assets/116870399/e3b0ba36-d43f-4cac-ad72-d2dfc39329ef)
 
 
 Blockchain verification of Seller named “Florian” Blockchain ID link:
@@ -53,11 +52,14 @@ http://38.242.241.22/inscription/6cf48bf6251d3375eece1a1da3a202925e5f7ac5e0bdc5e
 
 Seller named “Florian” Blockchain ID:
 
+![5](https://github.com/Ethylenoxid/LemonIngolstadt/assets/116870399/85b242cc-5691-4826-acf1-4e6f3bf100b4)
+
 - Digital Blockchain ID of Buyer:
-  ![5](https://github.com/Ethylenoxid/LemonIngolstadt/assets/116870399/1a02020f-2404-457a-9329-150abcbbaddb)
 
 
 Blockchain verification of Buyer named “Ankit” Blockchain ID link:
 http://38.242.241.22/inscription/2e4e01f0afdca2786cc4ffe829000111532b84ff3bf5e1bc9b361b96a92431dci0 
 
 Buyer named “Ankit” Blockchain ID:
+
+![5](https://github.com/Ethylenoxid/LemonIngolstadt/assets/116870399/85b242cc-5691-4826-acf1-4e6f3bf100b4)
