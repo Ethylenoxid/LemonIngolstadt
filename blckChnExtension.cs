@@ -7,12 +7,10 @@ using System.IO;
 using System.Text;
 
 
-//https://www.c-sharpcorner.com/article/blockchain-basics-building-a-blockchain-in-net-core/
 
 
 
 
-//namespace Rextester
 namespace Lemon
 {
     public class Block  
@@ -141,18 +139,30 @@ namespace Lemon
         {
             Console.WriteLine("Creating 1st blockchain");
 	    Blockchain phillyCoin = new Blockchain();
+	    bool useDefaultChain = true;
             Console.WriteLine("");
-	    phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Beckenbauer,receiver:Rummenigge,amount:10}"));
-	    phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Rummenigge,receiver:Hoeneß,amount:10}"));
-	    phillyCoin.PrintBlockchain();
 	    string hashToCheck="test";
-	    if (phillyCoin.IsValidE(hashToCheck))
+	    if (useDefaultChain)//default value for having a test case
 	    {
-                Console.WriteLine("Your certificate is valid");
+	        phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Beckenbauer,receiver:Rummenigge,amount:10}"));
+	        phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Rummenigge,receiver:Hoeneß,amount:10}"));
 	    }
 	    else
 	    {
-                Console.WriteLine("Invalid");
+	        //to implement: input of block chain;
+	        //to implement: reading input value for "hashToCheck" from unity system, validate the certificate
+		//ionteraction with test system in unity ("digital twin").
+	    }
+            Console.WriteLine("Block chain to be checked:");
+	    phillyCoin.PrintBlockchain();
+            Console.WriteLine("Checking if certiuficate is valid ...");
+	    if (phillyCoin.IsValidE(hashToCheck))
+	    {
+                Console.WriteLine("Your certificate is valid. Process can be continued ...");
+	    }
+	    else
+	    {
+                Console.WriteLine("Your certificate is invalid");
 	    }
         }
     }
